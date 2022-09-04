@@ -1,0 +1,4 @@
+[default]
+cd efi
+cargo +nightly-2022-08-25 build --target x86_64-unknown-uefi
+cd ..
