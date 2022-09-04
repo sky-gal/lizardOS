@@ -12,3 +12,7 @@ A - Awesome
 R - Real-time
 
 D - Kernel
+
+## Alternative answer
+
+A MISERABLE LITTLE PILE OF SECRETS!!
