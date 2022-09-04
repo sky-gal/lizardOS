@@ -1,6 +1,8 @@
 [default]
 cd efi
 cargo +nightly-2022-08-25 build --target x86_64-unknown-uefi
+mkdir -p ../target
+mkdir -p ../target/efi
 cp target/x86_64-unknown-uefi/debug/efi.efi ../target/efi/Bootx64.efi
 cd ..
 
