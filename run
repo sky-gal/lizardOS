@@ -1,7 +1,6 @@
 [default]
 cd efi
 cargo +nightly-2022-08-25 build --target x86_64-unknown-uefi
-cp target/x86_64-unknown-uefi/debug/efi.efi ../target/efi/Bootx64.efi
 cd ..
 
 dd if=/dev/zero of=target/disk.img bs=1048576 count=1024
@@ -9,5 +8,10 @@ sfdisk target/disk.img < efi/src/disk.txt
 sudo kpartx -a target/disk.img
 sudo mkfs.fat /dev/mapper/loop0p1
 sudo mount /dev/mapper/loop0p1 target/mnt
+
+sudo umount target/mnt
+sudo kpartx -d target/disk.img
+
+[umount]
 sudo umount target/mnt
 sudo kpartx -d target/disk.img
