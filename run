@@ -23,3 +23,8 @@ qemu-system-x86_64 target/disk.img -bios /usr/share/ovmf/x64/OVMF.fd
 [umount]
 sudo umount target/mnt
 sudo kpartx -d target/disk.img
+
+[doc]
+cd efi
+cargo +nightly-2022-08-25 doc --target x86_64-unknown-uefi
+cd ..
