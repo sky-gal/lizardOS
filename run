@@ -18,6 +18,8 @@ sudo cp efi/target/x86_64-unknown-uefi/debug/efi.efi target/mnt/EFI/Boot/Bootx64
 sudo umount target/mnt
 sudo kpartx -d target/disk.img
 
+qemu-system-x86_64 target/disk.img -bios /usr/share/ovmf/x64/OVMF.fd
+
 [umount]
 sudo umount target/mnt
 sudo kpartx -d target/disk.img
