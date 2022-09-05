@@ -11,7 +11,7 @@ fn main(_handle: Handle, mut system_table: SystemTable<Boot>) -> Status {
 
     macro_rules! print {
         ($text: expr) => {
-            let mut text_buffer = [0; $text.len()];
+            let mut text_buffer = [0; $text.len() + 1];
             let buf = CStr16::from_str_with_buf($text, &mut text_buffer).unwrap();
             system_table.stdout().output_string(&buf).unwrap();
         };
