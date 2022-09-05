@@ -7,7 +7,6 @@ use uefi::{prelude::*, CStr16};
 #[entry]
 fn main(_handle: Handle, mut system_table: SystemTable<Boot>) -> Status {
     uefi_services::init(&mut system_table).unwrap();
-    system_table.stdout().clear().unwrap();
 
     macro_rules! print {
         ($text: expr) => {
@@ -17,6 +16,13 @@ fn main(_handle: Handle, mut system_table: SystemTable<Boot>) -> Status {
         };
     }
 
+    macro_rules! clear {
+        () => {
+            system_table.stdout().clear().unwrap();
+        };
+    }
+
+    clear!();
     print!("Test");
 
     loop {}
