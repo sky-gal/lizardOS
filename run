@@ -1,5 +1,4 @@
 [default]
-mkdir -p target
 mkdir -p target/efi
 
 cd efi
