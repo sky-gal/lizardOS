@@ -2,9 +2,11 @@
 #![no_std]
 #![feature(abi_efiapi)]
 
+use core::convert::TryFrom;
+
 use uefi::{
     prelude::*,
-    CStr16,
+    CStr16, proto::console::text::Key, Char16,
 };
 
 #[entry]
@@ -20,6 +22,9 @@ fn main(_handle: Handle, mut system_table: SystemTable<Boot>) -> Status {
     }
 
     macro_rules! println {
+        () => {
+            print!("\x0a\x0d")
+        };
         ($text: expr) => {
             print!($text);
             print!("\x0a\x0d")
@@ -34,7 +39,21 @@ fn main(_handle: Handle, mut system_table: SystemTable<Boot>) -> Status {
 
     clear!();
     println!("Starting LizardOS");
-    print!("test");
 
-    loop {}
+    loop {
+        print!(">");
+        loop {
+            let key = system_table.stdin().read_key().unwrap();
+            if let Some(Key::Printable(key)) = key {
+                if key == Char16::try_from(0xd).unwrap() {
+                    break;
+                } else {
+                    let chars = [key.into(), 0];
+                    let string = CStr16::from_u16_with_nul(&chars).unwrap();
+                    system_table.stdout().output_string(string).unwrap();
+                }
+            }
+        }
+        println!();
+    }
 }
