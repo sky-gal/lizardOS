@@ -4,10 +4,7 @@
 
 use core::convert::TryFrom;
 
-use uefi::{
-    prelude::*,
-    CStr16, proto::console::text::Key, Char16,
-};
+use uefi::{prelude::*, proto::console::text::Key, CStr16, Char16};
 
 #[entry]
 fn main(_handle: Handle, mut system_table: SystemTable<Boot>) -> Status {
