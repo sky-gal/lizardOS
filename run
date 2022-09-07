@@ -5,7 +5,7 @@ cd efi
 cargo +nightly-2022-08-25 build --target x86_64-unknown-uefi
 cd ..
 
-dd if=/dev/zero of=target/disk.img bs=1048576 count=1024
+dd if=/dev/zero of=target/disk.img bs=1048576 count=400
 sfdisk target/disk.img < efi/src/disk.txt
 sudo kpartx -a target/disk.img
 sudo mkfs.fat -F 32 /dev/mapper/loop0p1
