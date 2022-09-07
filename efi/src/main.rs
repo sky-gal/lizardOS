@@ -19,6 +19,13 @@ fn main(_handle: Handle, mut system_table: SystemTable<Boot>) -> Status {
         };
     }
 
+    macro_rules! println {
+        ($text: expr) => {
+            print!($text);
+            print!("\x0a\x0d")
+        };
+    }
+
     macro_rules! clear {
         () => {
             system_table.stdout().clear().unwrap();
@@ -26,7 +33,8 @@ fn main(_handle: Handle, mut system_table: SystemTable<Boot>) -> Status {
     }
 
     clear!();
-    print!("Starting LizardOS");
+    println!("Starting LizardOS");
+    print!("test");
 
     loop {}
 }
